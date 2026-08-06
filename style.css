@@ -230,6 +230,12 @@ header p {
     .crossword-section {
         width: 100%;
         max-width: 100%;
+        overflow-x: auto;
         padding-bottom: 1rem;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .crossword-grid {
+        min-width: 600px; /* Ensure cells are large enough on mobile */
     }
 }

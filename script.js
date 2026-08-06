@@ -708,7 +708,9 @@ function highlightClue(number, direction) {
     const clueItem = document.querySelector(`.clue-item[data-number="${number}"][data-direction="${direction}"]`);
     if (clueItem) {
         clueItem.classList.add('active');
-        clueItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (window.innerWidth > 768) {
+            clueItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
     }
 }
 
