@@ -1,0 +1,235 @@
+:root {
+    --bg-dark: #0a0a0a;
+    --bg-red: #8b0000;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --accent: #ff3333;
+    --grid-bg: #ffffff;
+    --grid-border: #000000;
+    --grid-block: #111111;
+    --grid-highlight: #ffcccc;
+    --grid-focus: #ff9999;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+    background: radial-gradient(circle at top right, var(--bg-red) 0%, var(--bg-dark) 60%);
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    overflow-x: hidden;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.03)"/></svg>');
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+}
+
+header h1 .highlight {
+    color: var(--accent);
+}
+
+header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.crossword-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.crossword-grid {
+    display: grid;
+    /* Grid template rows/cols will be set by JS based on puzzle size */
+    background-color: var(--grid-border);
+    gap: 1px;
+    border: 3px solid var(--grid-border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+}
+
+.crossword-cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--grid-bg);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.crossword-cell.block {
+    background-color: var(--grid-block);
+    cursor: default;
+}
+
+.crossword-cell input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: clamp(0.6rem, 2vw, 1.2rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+    color: #000;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+    /* Prevent zoom on mobile */
+    touch-action: manipulation;
+}
+
+.crossword-cell.highlight {
+    background-color: var(--grid-highlight);
+}
+
+.crossword-cell.focus {
+    background-color: var(--grid-focus);
+}
+
+.cell-number {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    font-size: clamp(0.3rem, 1.2vw, 0.65rem);
+    font-weight: 500;
+    color: #333;
+    pointer-events: none;
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.clues-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.clues-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.clue-column h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    border-bottom: 2px solid rgba(255, 51, 51, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.clue-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.clue-item {
+    font-size: 1rem;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+.clue-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.clue-item.active {
+    background: rgba(255, 51, 51, 0.2);
+    border-left: 3px solid var(--accent);
+}
+
+.clue-number {
+    font-weight: 700;
+    margin-right: 0.5rem;
+    color: var(--text-secondary);
+}
+
+
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+
+    
+    .crossword-section {
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: 1rem;
+    }
+}
