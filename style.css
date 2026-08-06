@@ -233,6 +233,7 @@ header p {
         overflow-x: auto;
         padding-bottom: 1rem;
         -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
     }
 
     .crossword-grid {
